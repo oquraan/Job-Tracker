@@ -26,6 +26,6 @@ The app uses **Redux Toolkit** for state management and **Redux Persist** to sto
 - **Firebase Auth + Firestore** (Authentication & Database)
 - **Redux Toolkit** (State Management)
 - **Redux Persist** (Local Persistence)
-- **Material UI / Tailwind** (UI styling)
+- **Material UI 
 
 
