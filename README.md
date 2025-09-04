@@ -9,7 +9,6 @@ Users can **create, read, update, delete (CRUD)** and **filter** applications by
 - Interview
 - Rejected
 - Hired
-
 The app uses **Redux Toolkit** for state management and **Redux Persist** for local persistence.
 
 ---
