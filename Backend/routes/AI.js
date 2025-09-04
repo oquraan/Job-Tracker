@@ -10,14 +10,10 @@ const OpenAI = require("openai");
 const OPEN_AI_KEY = process.env.OPEN_AI_KEY;
 
 router.post("/ai", async (req, res) => {
-  console.log("vvvvvvvvvvvv");
-  console.log("OPEN_AI_KEY:", process.env.OPEN_AI_KEY);
-  // console.log(messages);
-
   const messages = req.body;
   try {
     const client = new OpenAI({
-      apiKey: process.env.OPEN_AI_KEY,
+      apiKey: OPEN_AI_KEY,
       // dangerouslyAllowBrowser: true,
     });
 
