@@ -1,0 +1,178 @@
+
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.header-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-title h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+  overflow: hidden;
+  padding: 16px;
+}
+
+.upload-btn {
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.upload-btn:hover {
+  background: #1d4ed8;
+}
+
+.file-preview {
+  margin-top: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 12px;
+  background: #f9fafb;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.file-text {
+  font-family: monospace;
+  font-size: 0.875rem;
+  color: #374151;
+  white-space: pre-wrap;
+}
+
+.pdf-page {
+  margin: 12px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.primary-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  margin: 8px 0;
+  transition: background 0.2s;
+}
+
+.primary-btn:hover {
+  background: #1d4ed8;
+}
+
+.results-card .result-item {
+  padding: 12px;
+  margin-bottom: 12px;
+  background: rgba(243, 244, 246, 0.5);
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.icon {
+  height: 20px;
+  width: 20px;
+}
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* تباعد بين الرسائل */
+}
+
+.result-item {
+  max-width: 80%;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+}
+
+/* رسائل AI */
+.result-item.assistant {
+  background-color: #dbeafe; /* أزرق فاتح */
+  color: #1e3a8a; /* أزرق داكن للنص */
+  align-self: flex-start; /* يسار */
+}
+
+/* رسائل المستخدم */
+.result-item.user {
+  background-color: #d1fae5; /* أخضر فاتح */
+  color: #065f46; /* أخضر داكن للنص */
+  align-self: flex-end; /* يمين */
+}
+
+/* Markdown Styles */
+.result-item p {
+  margin-bottom: 12px;
+}
+
+.result-item h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 16px 0 8px;
+}
+
+.result-item h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 14px 0 7px;
+}
+
+.result-item h3 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 12px 0 6px;
+}
+
+.result-item strong {
+  font-weight: 600;
+  color: #dc2626; /* أحمر للنص الغامق */
+}
+
+.result-item em {
+  font-style: italic;
+}
+
+.result-item code {
+  background-color: #f3f4f6;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.result-item li {
+  margin-left: 20px;
+  margin-bottom: 6px;
+}
+.resume-label {
+  display: flex;
+  flex-direction: column; 
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  background-color: #f9f9f9;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  max-width: auto; 
+}
