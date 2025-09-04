@@ -33,7 +33,7 @@ Rules:
     try {
       // const reply = await chat(newMessages);
       const reply = await axios.post("http://localhost:3001/ai", newMessages);
-      console.log(reply);
+      // console.log(reply);
       setmessages((currentMessages) => [
         ...currentMessages,
         { role: "assistant", content: reply.data },
