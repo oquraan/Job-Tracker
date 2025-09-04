@@ -31,7 +31,12 @@ import {
 } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import JobAnalyzer from "../component/JobAnalyzer";
+import ResumeHelper from "../component/ResumeHeIper";
 import { db } from "../firebase";
+import useSummary from "../hooks/useSummary";
+import { MessageCircle, X, Send } from "lucide-react";
+import ChatBox from "../component/chatBox";
 
 export default function Dash() {
   const statusColors = {
@@ -45,6 +50,10 @@ export default function Dash() {
   const [status, setStatus] = useState("applied");
 
   const [applications, setApplications] = useState([]);
+  const [textContent, setTextContents] = useState("");
+  const { messages, sendMessage } = useSummary();
+  const [isUploadeCV, setIsUploadCV] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = async (id) => {
     setApplications(applications.filter((app) => app.id !== id));
@@ -90,6 +99,13 @@ export default function Dash() {
     }));
 
     setApplications(apps);
+    console.log("ssssssssssssssssssssssssssssssss");
+    console.log(apps);
+    console.log("ssssssssssssssssssssssssssssssss");
+
+    sendMessage(apps);
+    // alert(messages);
+    console.log(messages);
   }
   console.log(applications);
   useEffect(() => {
@@ -136,9 +152,25 @@ export default function Dash() {
     filterStatus === "all"
       ? applications
       : applications.filter((app) => app.status === filterStatus);
+  const assistantMessages = messages.filter((msg) => msg.role === "assistant");
 
   return (
     <>
+
+ <button
+      onClick={() => setIsOpen(true)}
+        className={`chat-button ${isOpen ? "hidden" : ""}`}
+      >
+        <MessageCircle size={24} />
+      </button>
+
+<ChatBox isOpen={isOpen} setIsOpen={setIsOpen}></ChatBox>
+
+
+
+
+
+    
       {" "}
       <div className="form-container">
         <div className="form-header">
@@ -199,67 +231,10 @@ export default function Dash() {
             Save Application
           </button>
         </form>
-        {/* 
-      <Card className="applications-table-container">
-        <CardHeader className="applications-table-header">
-          <CardTitle className="applications-table-title">
-            Applications ({applications.length})
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="applications-table-content">
-          <Table className="applications-table">
-            <TableHeader>
-              <TableRow>
-                <TableHead>Company</TableHead>
-                <TableHead>Position</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {applications.map((app) => (
-                <TableRow key={app.id}>
-                  <TableCell className="font-medium">{app.company}</TableCell>
-                  <TableCell>{app.position}</TableCell>
-                  <TableCell>
-                    <span
-                      className={`status-badge ${statusColors[app.status]}`}
-                    >
-                      {app.status.charAt(0).toUpperCase() + app.status.slice(1)}
-                    </span>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div className="action-buttons">
-                      <button
-                        onClick={() => handleUpdate(app.id)}
-                        className="action-button update"
-                        title="Update application"
-                      >
-                        <Edit className="h-4 w-4" />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(app.id)}
-                        className="action-button delete"
-                        title="Delete application"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          {applications.length === 0 && (
-            <div className="empty-state">
-              No applications found. Start applying to jobs!
-            </div>
-          )}
-        </CardContent>
-      </Card> */}
       </div>
       <Card sx={{ borderRadius: 2, boxShadow: 3 }}>
         <CardHeader
+          className="card-object"
           title={
             <Typography variant="h6">
               Applications ({applications.length})
@@ -267,43 +242,10 @@ export default function Dash() {
           }
           sx={{ backgroundColor: "primary.main", color: "white" }}
         />
-        {/* 
-        <Stack direction="row" spacing={2}>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={() => setFilterState("applied")}
-          >
-            Applied
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={() => setFilterState("interview")}
-          >
-            InterView
-          </Button>
-          <Button color="secondary" onClick={() => setFilterState("rejected")}>
-            Rejected{" "}
-          </Button>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={() => setFilterState("hired")}
-          >
-            Hired
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={() => setFilterState("all")}
-          >
-            All
-          </Button>
-        </Stack> */}
+
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           {" "}
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2} style={{ marginTop: "20px" }}>
             <Button
               onClick={() => setFilterState("applied")}
               sx={{
@@ -431,6 +373,30 @@ export default function Dash() {
                   ))}
                 </TableBody>
               </Table>
+              {/* <div>{messages}</div>{" "} */}
+              <div className="card-content">
+                {assistantMessages.length > 0 && (
+                  <div className="result-item">
+                    <div className="result-text">
+                      {assistantMessages[assistantMessages.length - 1].content
+                        .split("\n")
+                        .filter((line) => line.trim())
+                        .map((line, index) => (
+                          <p key={index} className="result-line">
+                            {line}
+                          </p>
+                        ))}
+                    </div>
+
+                    <div className="assistant-footer">
+                      <div className="assistant-indicator">
+                        <div className="pulse-dot"></div>
+                        Assistant Response
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </TableContainer>
           ) : (
             <Box sx={{ textAlign: "center", p: 3, color: "text.secondary" }}>
@@ -439,6 +405,13 @@ export default function Dash() {
           )}
         </CardContent>
       </Card>{" "}
+      <ResumeHelper
+        setTextContents={setTextContents}
+        setIsUploadCV={setIsUploadCV}
+      ></ResumeHelper>
+      {isUploadeCV ? (
+        <JobAnalyzer textContent={textContent}></JobAnalyzer>
+      ) : null}
     </>
   );
 }
