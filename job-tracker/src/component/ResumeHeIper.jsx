@@ -5,9 +5,9 @@ import { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import useChat from "../hooks/useAiUoloadedTheRuseme";
 import MarkdownRenderer from "./MarkdownRenderer";
 import "./ResumeHeIper.css";
-import useChat from "../hooks/useChat";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 export default function ResumeHelper({ setTextContents, setIsUploadCV }) {
@@ -28,6 +28,7 @@ export default function ResumeHelper({ setTextContents, setIsUploadCV }) {
     setIsChangeUplodedFile(true);
 
     if (!textContent.trim()) return;
+    console.log(textContent);
     await sendMessage(textContent);
     // setInput("");
     setIsAskedAi(true);
